@@ -32,7 +32,6 @@ on:
       - "main"
 
 env:
-  AWS_REGION: us-east-1                  # set this to your preferred AWS region, e.g. us-west-1
   ECR_REPOSITORY: demo-deploy          # set this to your Amazon ECR repository name
   ECS_SERVICE: demo-deploy                # set this to your Amazon ECS service name
   ECS_CLUSTER: demo-deploy                 # set this to your Amazon ECS cluster name
@@ -56,9 +55,9 @@ jobs:
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        role-to-assume: ########################### # Update the ARN of the IAM role
-        role-session-name: Github
-        aws-region: ${{ env.AWS_REGION }}
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ap-south-1
 
     - name: Login to Amazon ECR
       id: login-ecr
